@@ -2,7 +2,7 @@
 title: "The Effects of Adaptive Eating Behaviors on Weight Loss of Physically Disabled
 Children and Adolescents"
 subtitle: ""
-author: "Cui Tianxiang"
+author: "Cui, Tianxiang (YC273132)"
 institute: "Department of Psychology, University of Macau"
 date: "2023.04.03"
 output: 
@@ -20,584 +20,326 @@ class: inverse, center, middle
 
 ---
 
-# Obesity...
+# Obesity
 
-- is rapidly growing (Arroyo-Johnson & Mincey, 2016)
+Obesity is rapidly growing in both developed and developing countries (Arroyo-Johnson & Mincey, 2016)
+
 
 --
 
-- boosts the risk of developing severe physical health problems and mental health problems
+Obesity boosts the risk of developing... 
 
-
-
-
-
----
-background-image: url(`r xaringan:::karl`)
-background-position: 50% 50%
-class: center, bottom, inverse
-
-# You only live once!
-
----
-
-# Hello Ninja
-
-As a presentation ninja, you certainly should not be satisfied by the "Hello World" example. You need to understand more about two things:
-
-1. The [remark.js](https://remarkjs.com) library;
-
-1. The **xaringan** package;
-
-Basically **xaringan** injected the chakra of R Markdown (minus Pandoc) into **remark.js**. The slides are rendered by remark.js in the web browser, and the Markdown source needed by remark.js is generated from R Markdown (**knitr**).
-
----
-
-# remark.js
-
-You can see an introduction of remark.js from [its homepage](https://remarkjs.com). You should read the [remark.js Wiki](https://github.com/gnab/remark/wiki) at least once to know how to
-
-- create a new slide (Markdown syntax<sup>*</sup> and slide properties);
-
-- format a slide (e.g. text alignment);
-
-- configure the slideshow;
-
-- and use the presentation (keyboard shortcuts).
-
-It is important to be familiar with remark.js before you can understand the options in **xaringan**.
-
-.footnote[[*] It is different with Pandoc's Markdown! It is limited but should be enough for presentation purposes. Come on... You do not need a slide for the Table of Contents! Well, the Markdown support in remark.js [may be improved](https://github.com/gnab/remark/issues/142) in the future.]
-
----
-background-image: url(`r xaringan:::karl`)
-background-size: cover
-class: center, bottom, inverse
-
-# I was so happy to have discovered remark.js!
-
----
-class: inverse, middle, center
-
-# Using xaringan
-
----
-
-# xaringan
-
-Provides an R Markdown output format `xaringan::moon_reader` as a wrapper for remark.js, and you can use it in the YAML metadata, e.g.
-
-```yaml
----
-title: "A Cool Presentation"
-output:
-  xaringan::moon_reader:
-    yolo: true
-    nature:
-      autoplay: 30000
----
-```
-
-See the help page `?xaringan::moon_reader` for all possible options that you can use.
-
----
-
-# remark.js vs xaringan
-
-Some differences between using remark.js (left) and using **xaringan** (right):
-
-.pull-left[
-1. Start with a boilerplate HTML file;
-
-1. Plain Markdown;
-
-1. Write JavaScript to autoplay slides;
-
-1. Manually configure MathJax;
-
-1. Highlight code with `*`;
-
-1. Edit Markdown source and refresh browser to see updated slides;
-]
-
-.pull-right[
-1. Start with an R Markdown document;
-
-1. R Markdown (can embed R/other code chunks);
-
-1. Provide an option `autoplay`;
-
-1. MathJax just works;<sup>*</sup>
-
-1. Highlight code with `{{}}`;
-
-1. The RStudio addin "Infinite Moon Reader" automatically refreshes slides on changes;
-]
-
-.footnote[[*] Not really. See next page.]
-
----
-
-# Math Expressions
-
-You can write LaTeX math expressions inside a pair of dollar signs, e.g. &#36;\alpha+\beta$ renders $\alpha+\beta$. You can use the display style with double dollar signs:
-
-```
-$$\bar{X}=\frac{1}{n}\sum_{i=1}^nX_i$$
-```
-
-$$\bar{X}=\frac{1}{n}\sum_{i=1}^nX_i$$
-
-Limitations:
-
-1. The source code of a LaTeX math expression must be in one line, unless it is inside a pair of double dollar signs, in which case the starting `$$` must appear in the very beginning of a line, followed immediately by a non-space character, and the ending `$$` must be at the end of a line, led by a non-space character;
-
-1. There should not be spaces after the opening `$` or before the closing `$`.
-
-1. Math does not work on the title slide (see [#61](https://github.com/yihui/xaringan/issues/61) for a workaround).
-
----
-
-# R Code
-
-```{r comment='#'}
-# a boring regression
-fit = lm(dist ~ 1 + speed, data = cars)
-coef(summary(fit))
-dojutsu = c('地爆天星', '天照', '加具土命', '神威', '須佐能乎', '無限月読')
-grep('天', dojutsu, value = TRUE)
-```
-
----
-
-# R Plots
-
-```{r cars, fig.height=4, dev='svg'}
-par(mar = c(4, 4, 1, .1))
-plot(cars, pch = 19, col = 'darkgray', las = 1)
-abline(fit, lwd = 2)
-```
-
----
-
-# Tables
-
-If you want to generate a table, make sure it is in the HTML format (instead of Markdown or other formats), e.g.,
-
-```{r}
-knitr::kable(head(iris), format = 'html')
-```
-
----
-
-# HTML Widgets
-
-I have not thoroughly tested HTML widgets against **xaringan**. Some may work well, and some may not. It is a little tricky.
-
-Similarly, the Shiny mode (`runtime: shiny`) does not work. I might get these issues fixed in the future, but these are not of high priority to me. I never turn my presentation into a Shiny app. When I need to demonstrate more complicated examples, I just launch them separately. It is convenient to share slides with other people when they are plain HTML/JS applications.
-
-See the next page for two HTML widgets.
-
----
-
-```{r out.width='100%', fig.height=6, eval=require('leaflet')}
-library(leaflet)
-leaflet() %>% addTiles() %>% setView(-93.65, 42.0285, zoom = 17)
-```
-
----
-
-```{r eval=require('DT'), tidy=FALSE}
-DT::datatable(
-  head(iris, 10),
-  fillContainer = FALSE, options = list(pageLength = 8)
-)
-```
-
----
-
-# Some Tips
-
-- Do not forget to try the `yolo` option of `xaringan::moon_reader`.
-
-    ```yaml
-    output:
-      xaringan::moon_reader:
-        yolo: true
-    ```
-
----
-
-# Some Tips
-
-- Slides can be automatically played if you set the `autoplay` option under `nature`, e.g. go to the next slide every 30 seconds in a lightning talk:
-
-    ```yaml
-    output:
-      xaringan::moon_reader:
-        nature:
-          autoplay: 30000
-    ```
-
-- If you want to restart the play after it reaches the last slide, you may set the sub-option `loop` to TRUE, e.g.,
-
-    ```yaml
-    output:
-      xaringan::moon_reader:
-        nature:
-          autoplay:
-            interval: 30000
-            loop: true
-    ```
-
----
-
-# Some Tips
-
-- A countdown timer can be added to every page of the slides using the `countdown` option under `nature`, e.g. if you want to spend one minute on every page when you give the talk, you can set:
-
-    ```yaml
-    output:
-      xaringan::moon_reader:
-        nature:
-          countdown: 60000
-    ```
-
-    Then you will see a timer counting down from `01:00`, to `00:59`, `00:58`, ... When the time is out, the timer will continue but the time turns red.
-    
----
-
-# Some Tips
-
-- The title slide is created automatically by **xaringan**, but it is just another remark.js slide added before your other slides.
-
-    The title slide is set to `class: center, middle, inverse, title-slide` by default. You can change the classes applied to the title slide with the `titleSlideClass` option of `nature` (`title-slide` is always applied).
-
-    ```yaml
-    output:
-      xaringan::moon_reader:
-        nature:
-          titleSlideClass: [top, left, inverse]
-    ```
-    
 --
 
-- If you'd like to create your own title slide, disable **xaringan**'s title slide with the `seal = FALSE` option of `moon_reader`.
+**physical health** problems 
+  
+- **cancer** (Calle & Kaaks, 2004)
+- **type 2 diabetes** (Stein & Colditz, 2004)
+- **cardiovascular disease** (Field et al., 2001)
 
-    ```yaml
-    output:
-      xaringan::moon_reader:
-        seal: false
-    ```
+--
 
----
+**mental health** problems
+  
+- **depression** (Stunkard et al., 2003)
+- **low self-esteem** (Franklin et al., 2006)
+- **body dissatisfaction and eating disorders** (Brownell & Walsh, 2017; He et al., 2017)
 
-# Some Tips
 
-- There are several ways to build incremental slides. See [this presentation](https://slides.yihui.org/xaringan/incremental.html) for examples.
 
-- The option `highlightLines: true` of `nature` will highlight code lines that start with `*`, or are wrapped in `{{ }}`, or have trailing comments `#<<`;
+???
 
-    ```yaml
-    output:
-      xaringan::moon_reader:
-        nature:
-          highlightLines: true
-    ```
-
-    See examples on the next page.
+the presentation starts from obesity
 
 ---
 
-# Some Tips
+# The prevalence of obesity
 
+Obesity has increased in over 70 countries from 1980 to 2015, and continues to rise in most countries. (The GBD 2015 Obesity Collaborators, 2017).
 
-.pull-left[
-An example using a leading `*`:
+--
 
-    ```r
-    if (TRUE) {
-    ** message("Very important!")
-    }
-    ```
-Output:
-```r
-if (TRUE) {
-* message("Very important!")
-}
-```
+China has seen a dramatic increase in obesity among adults, especially among men (Mi et al., 2015).
 
-This is invalid R code, so it is a plain fenced code block that is not executed.
-]
+--
 
-.pull-right[
-An example using `{{}}`:
+- an annual cost of 24.35 billion RMB or 2.46% of the nation’s healthcare expenditure due to the increasing obesity rate (Qin & Pan, 2016).
 
-````
-`r ''````{r tidy=FALSE}
-if (TRUE) {
-*{{ message("Very important!") }}
-}
-```
-````
-Output:
-```{r tidy=FALSE}
-if (TRUE) {
-{{ message("Very important!") }}
-}
-```
-
-It is valid R code so you can run it. Note that `{{}}` can wrap an R expression of multiple lines.
-]
 
 ---
 
-# Some Tips
+# Obesity & physically disabled people
 
-An example of using the trailing comment `#<<` to highlight lines:
+Physically disabled children and adolescents have a higher rate of obesity compared to their non-disabled peers (Neter et al., 2011)
 
-````markdown
-`r ''````{r tidy=FALSE}
-library(ggplot2)
-ggplot(mtcars) + 
-  aes(mpg, disp) + 
-  geom_point() +   #<<
-  geom_smooth()    #<<
-```
-````
+--
 
-Output:
+Reasons for the higher obesity rate
 
-```{r tidy=FALSE, eval=FALSE}
-library(ggplot2)
-ggplot(mtcars) + 
-  aes(mpg, disp) + 
-  geom_point() +   #<<
-  geom_smooth()    #<<
-```
+--
+
+- It is difficult for them to complete enough physical activities and access healthy diets and exercise facilities, as they often come from low-income families (Emerson et al., 2010; Rimmer & Rowland, 2008).
+
+--
+
+- Their lack of social activities may lead to feelings of loneliness and result in binge eating or other **maladaptive eating behaviors**, which can trigger obesity. (Reinehr et al., 2010; Warren et al., 2017).
 
 ---
 
-# Some Tips
+#  Adaptive Eating behaviors
 
-When you enable line-highlighting, you can also use the chunk option `highlight.output` to highlight specific lines of the text output from a code chunk. For example, `highlight.output = TRUE` means highlighting all lines, and `highlight.output = c(1, 3)` means highlighting the first and third line.
+- Developing adaptive eating behaviors (e.g., mindful eating and intuitive eating) can positively address obesity-related behaviors, including binge eating and emotional eating (Warren et al., 2017).
 
-````md
-`r ''````{r, highlight.output=c(1, 3)}
-head(iris)
-```
-````
+--
 
-```{r, highlight.output=c(1, 3), echo=FALSE}
-head(iris)
-```
+- Mindful eating and intuitive eating emphasize developing a good relationship with food, being aware of food choice, and recognizing feelings of hunger and fullness (Warren et al., 2017).
 
-Question: what does `highlight.output = c(TRUE, FALSE)` mean? (Hint: think about R's recycling of vectors)
+--
+
+- Adaptive Eating behaviors can help individuals slow down consumption of a meal and recognize feelings of fullness to better control overeating (Lofgren, 2015).
+
 
 ---
 
-# Some Tips
+# Why focusing on eating behaviors?
 
-- To make slides work offline, you need to download a copy of remark.js in advance, because **xaringan** uses the online version by default (see the help page `?xaringan::moon_reader`).
+- Physically disabled individuals have more difficulties doing exercises to lose weight compare to non-disabled peers (Rimmer & Rowland, 2008) 
 
-- You can use `xaringan::summon_remark()` to download the latest or a specified version of remark.js. By default, it is downloaded to `libs/remark-latest.min.js`.
+--
 
-- Then change the `chakra` option in YAML to point to this file, e.g.
+- They may experience sense of isolation which can lead to disordered eating behaviors (Warren et al., 2017)
 
-    ```yaml
-    output:
-      xaringan::moon_reader:
-        chakra: libs/remark-latest.min.js
-    ```
+--
 
-- If you used Google fonts in slides (the default theme uses _Yanone Kaffeesatz_, _Droid Serif_, and _Source Code Pro_), they won't work offline unless you download or install them locally. The Heroku app [google-webfonts-helper](https://google-webfonts-helper.herokuapp.com/fonts) can help you download fonts and generate the necessary CSS.
+- Adaptive eating behaviors focusing on internal feelings and sensations can be a feasible approach for them to reduce obesity.
 
----
+--
 
-# Macros
-
-- remark.js [allows users to define custom macros](https://github.com/yihui/xaringan/issues/80) (JS functions) that can be applied to Markdown text using the syntax `![:macroName arg1, arg2, ...]` or `![:macroName arg1, arg2, ...](this)`. For example, before remark.js initializes the slides, you can define a macro named `scale`:
-
-    ```js
-    remark.macros.scale = function (percentage) {
-      var url = this;
-      return '<img src="' + url + '" style="width: ' + percentage + '" />';
-    };
-    ```
-
-    Then the Markdown text
-
-    ```markdown
-    ![:scale 50%](image.jpg)
-    ```
-
-    will be translated to
-    
-    ```html
-    <img src="image.jpg" style="width: 50%" />
-    ```
+- Previous treatments for obesity in this population didn’t involve these interventions, highlighting the importance of this approach (Matizanadzo & Paudyal, 2021; McPherson et al., 2014).
 
 ---
 
-# Macros (continued)
+# Previous interventions
 
-- To insert macros in **xaringan** slides, you can use the option `beforeInit` under the option `nature`, e.g.,
+Physical training, exercises, and diet education have not shown significant reductions in BMI or weight (Matizanadzo & Paudyal, 2021; McPherson et al., 2014)
 
-    ```yaml
-    output:
-      xaringan::moon_reader:
-        nature:
-          beforeInit: "macros.js"
-    ```
+--
 
-    You save your remark.js macros in the file `macros.js`.
+- Physical activities and dietary intervention might have failed to be optimally combined (Matizanadzo & Paudyal, 2021)
 
-- The `beforeInit` option can be used to insert arbitrary JS code before `remark.create()`. Inserting macros is just one of its possible applications.
+--
 
----
+- Studies have had small to medium sample sizes and few involved control group
 
-# CSS
+--
 
-Among all options in `xaringan::moon_reader`, the most challenging but perhaps also the most rewarding one is `css`, because it allows you to customize the appearance of your slides using any CSS rules or hacks you know.
+- Previous research has lacked long-term interventions, with most evaluations being conducted less than three months after the interventions (McPherson et al., 2014)
 
-You can see the default CSS file [here](https://github.com/yihui/xaringan/blob/master/inst/rmarkdown/templates/xaringan/resources/default.css). You can completely replace it with your own CSS files, or define new rules to override the default. See the help page `?xaringan::moon_reader` for more information.
+--
+
+- The importance of parental involvement in children's obesity interventions has been underestimated (Golan & Weizman, 2001)
 
 ---
 
-# CSS
+# The present study
 
-For example, suppose you want to change the font for code from the default "Source Code Pro" to "Ubuntu Mono". You can create a CSS file named, say, `ubuntu-mono.css`:
+- To integrate the theories of mindful eating and intuitive eating, and apply them to physically disabled adolescents in China
 
-```css
-@import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+--
 
-.remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
-```
+- This theoretical basis will inform the design of an intervention scheme and manual
 
-Then set the `css` option in the YAML metadata:
+--
 
-```yaml
-output:
-  xaringan::moon_reader:
-    css: ["default", "ubuntu-mono.css"]
-```
+- The feasibility of the intervention scheme will be verified and revised through pretesting, leading to a final scheme
 
-Here I assume `ubuntu-mono.css` is under the same directory as your Rmd.
+--
 
-See [yihui/xaringan#83](https://github.com/yihui/xaringan/issues/83) for an example of using the [Fira Code](https://github.com/tonsky/FiraCode) font, which supports ligatures in program code.
+- A cluster randomized control study will evaluate the effect of the scheme in different intervention modes
+
+--
+
+- The short- and long-term effects of the scheme will be evaluated the short- and long-term effects of the scheme, and ultimately guide the development of an obesity intervention guide for physically disabled adolescents
+
+--
+
+- The study hypothesizes that the intervention scheme will show positive effects on children and adolescents with physical disabilities
+
+
+---
+class: inverse, center, middle
+
+# Methods
 
 ---
 
-# CSS (with Sass)
+# Participants
 
-**xaringan** also supports Sass support via **rmarkdown**. Suppose you want to use the same color for different elements, e.g., first heading and bold text. You can create a `.scss` file, say `mytheme.scss`, using the [sass](https://sass-lang.com/) syntax with variables:
+Sample size estimation: G*Power
 
-```scss
-$mycolor: #ff0000; 
-.remark-slide-content > h1 { color: $mycolor; }
-.remark-slide-content strong { color: $mycolor; }
-```
+--
 
-Then set the `css` option in the YAML metadata using this file placed under the same directory as your Rmd:
+Junior high school students from rehabilitation centers, with parents being involved
 
-```yaml
-output:
-  xaringan::moon_reader:
-    css: ["default", "mytheme.scss"]
-```
+--
 
-This requires **rmarkdown** >= 2.8 and the [**sass**](https://rstudio.github.io/sass/) package. You can learn more about **rmarkdown** and **sass** support in [this blog post](https://blog.rstudio.com/2021/04/15/2021-spring-rmd-news/#sass-and-scss-support-for-html-based-output) and in [**sass** overview vignette](https://rstudio.github.io/sass/articles/sass.html).
+Inclusion and exclusion criteria
 
----
+- Families will be excluded if the child has an intellectual disability, comorbidities or other health conditions, or is receiving other interventions.
 
-# Themes
+- Medical records will be examined to confirm their physical disability status
 
-Don't want to learn CSS? Okay, you can use some user-contributed themes. A theme typically consists of two CSS files `foo.css` and `foo-fonts.css`, where `foo` is the theme name. Below are some existing themes:
+- Waist circumferences will be measured to determine whether a participant is obese or not (boys: over 83cm; girls: over 78cm; Wingo et al., 2015)
 
-```{r, R.options=list(width = 70)}
-names(xaringan:::list_css())
-```
+--
+
+Informed consent
 
 ---
 
-# Themes
+# Study design
 
-To use a theme, you can specify the `css` option as an array of CSS filenames (without the `.css` extensions), e.g.,
+Preparations
 
-```yaml
-output:
-  xaringan::moon_reader:
-    css: [default, metropolis, metropolis-fonts]
-```
+--
 
-If you want to contribute a theme to **xaringan**, please read [this blog post](https://yihui.org/en/2017/10/xaringan-themes).
+- A comprehensive theoretical model
 
----
-class: inverse, middle, center
-background-image: url(https://upload.wikimedia.org/wikipedia/commons/3/39/Naruto_Shiki_Fujin.svg)
-background-size: contain
+--
 
-# Naruto
+- Revise and localize the model 
 
----
-background-image: url(https://upload.wikimedia.org/wikipedia/commons/b/be/Sharingan_triple.svg)
-background-size: 100px
-background-position: 90% 8%
+--
 
-# Sharingan
+- Scheme and the manual for intervention
 
-The R package name **xaringan** was derived<sup>1</sup> from **Sharingan**, a dōjutsu in the Japanese anime _Naruto_ with two abilities:
+--
 
-- the "Eye of Insight"
 
-- the "Eye of Hypnotism"
+Pilot study: 6-8 weeks
 
-I think a presentation is basically a way to communicate insights to the audience, and a great presentation may even "hypnotize" the audience.<sup>2,3</sup>
+--
 
-.footnote[
-[1] In Chinese, the pronounciation of _X_ is _Sh_ /ʃ/ (as in _shrimp_). Now you should have a better idea of how to pronounce my last name _Xie_.
+Formal intervention: short- (after 3 months) and long-term (after 1 year)
 
-[2] By comparison, bad presentations only put the audience to sleep.
+- mode 1 “regular intervention” (in addition to the health education curriculum and physical activity, intervention scheme will be given)
 
-[3] Personally I find that setting background images for slides is a killer feature of remark.js. It is an effective way to bring visual impact into your presentations.
-]
+- mode 2 “integrated intervention” (integrate the intervention scheme into the health education curriculum and physical activity)
+
+- mode 3 “indirect intervention” (adolescents will be given health education curriculum and physical activity only but parents will be given lessons)
+
+- The control group will be assigned a health education curriculum only
 
 ---
 
-# Naruto terminology
+# Measures
 
-The **xaringan** package borrowed a few terms from Naruto, such as
+Eating Disorder Symptomatology
 
-- [Sharingan](https://naruto.fandom.com/wiki/Sharingan) (写輪眼; the package name)
+- The 12-item Eating Disorder Examination Questionnaire (EDE-QS; Gideon et al., 2016)
 
-- The [moon reader](https://naruto.fandom.com/wiki/Moon_Reader) (月読; an attractive R Markdown output format)
+Intuitive eating
 
-- [Chakra](https://naruto.fandom.com/wiki/Chakra) (查克拉; the path to the remark.js library, which is the power to drive the presentation)
+- The Intuitive Eating Scale-2 (IES-2; Tylka & Kroon Van Diest, 2013)
 
-- [Nature transformation](https://naruto.fandom.com/wiki/Nature_Transformation) (性質変化; transform the chakra by setting different options)
+Mindful eating
 
-- The [infinite moon reader](https://naruto.fandom.com/wiki/Infinite_Tsukuyomi) (無限月読; start a local web server to continuously serve your slides)
+- The 17-item Mindful Eating Questionnaire adapted for Children (MEQ-C; Hart et al., 2018)
 
-- The [summoning technique](https://naruto.fandom.com/wiki/Summoning_Technique) (download remark.js from the web)
+Waist circumference
 
-You can click the links to know more about them if you want. The jutsu "Moon Reader" may seem a little evil, but that does not mean your slides are evil.
+The development stage of puberty
 
----
-
-class: center
-
-# Hand seals (印)
-
-Press `h` or `?` to see the possible ninjutsu you can use in remark.js.
-
-![](https://upload.wikimedia.org/wikipedia/commons/7/7e/Mudra-Naruto-KageBunshin.svg)
+- The Chinese version of the self-reported Pubertal Development Scale (Chan et al., 2010)
 
 ---
 
-class: center, middle
+# Data analysis
+
+- Correlational analysis
+
+- One-way analysis of variance
+
+- A repeated measures multivariate analysis of variance
+
+- Intention-to-treat analysis
+
+---
+
+# References
+
+Arroyo-Johnson, C., & Mincey, K. D. (2016). Obesity Epidemiology Worldwide. *Gastroenterology Clinics of North America*, *45*(4), 571–579. https://doi.org/10.1016/j.gtc.2016.07.012
+
+Brownell, K. D., & Walsh, B. T. (2017). *Eating disorders and obesity: A comprehensive handbook*. Guilford Publications.
+
+Calle, E. E., & Kaaks, R. (2004). Overweight, obesity and cancer: Epidemiological evidence and proposed mechanisms. *Nature Reviews Cancer*, *4*(8), 579–591. https://doi.org/10.1038/nrc1408
+
+Chan, N. P. T., Sung, R. Y. T., Nelson, E. A. S., So, H. K., Tse, Y. K., & Kong, A. P. S. (2010). Measurement of Pubertal Status with a Chinese Self-report Pubertal Development Scale. *Maternal and Child Health Journal*, *14*(3), 466–473. https://doi.org/10.1007/s10995-009-0481-2
+
+Emerson, E., Shahtahmasebi, S., Lancaster, G., & Berridge, D. (2010). Poverty transitions among families supporting a child with intellectual disability. *Journal of Intellectual & Developmental Disability*, *35*(4), 224–234. https://doi.org/10.3109/13668250.2010.518562
+
+---
+
+# References
+
+Field, A. E., Coakley, E. H., Must, A., Spadano, J. L., Laird, N., Dietz, W. H., Rimm, E., & Colditz, G. A. (2001). Impact of Overweight on the Risk of Developing Common Chronic Diseases During a 10-Year Period. *Archives of Internal Medicine*, *161*(13), 1581. https://doi.org/10.1001/archinte.161.13.1581
+
+Franklin, J., Denyer, G., Steinbeck, K. S., Caterson, I. D., & Hill, A. J. (2006). Obesity and Risk of Low Self-esteem: A Statewide Survey of Australian Children. *PEDIATRICS*, *118*(6), 2481–2487. https://doi.org/10.1542/peds.2006-0511
+
+Gideon, N., Hawkes, N., Mond, J., Saunders, R., Tchanturia, K., & Serpell, L. (2016). Development and psychometric validation of the EDE-QS, a 12 item short form of the Eating Disorder Examination Questionnaire (EDE-Q). *PLoS One*, *11*(5), e0152744.
+
+Golan, M., & Weizman, A. (2001). Familial approach to the treatment of childhood obesity: Conceptual model. *Journal of Nutrition Education*, *33*(2), 102–107. https://doi.org/10.1016/S1499-4046(06)60173-5
+
+Hart, S. R., Pierson, S., Goto, K., & Giampaoli, J. (2018). Development and initial validation evidence for a mindful eating questionnaire for children. *Appetite*, *129*, 178–185. https://doi.org/10.1016/j.appet.2018.07.010
+
+---
+
+# References
+
+He, J., Cai, Z., & Fan, X. (2017). Prevalence of binge and loss of control eating among children and adolescents with overweight and obesity: An exploratory meta-analysis. *International Journal of Eating Disorders*, *50*(2), 91–103. https://doi.org/10.1002/eat.22661
+
+Lofgren, I. E. (2015). Mindful eating: An emerging approach for healthy weight management. *American Journal of Lifestyle Medicine*, *9*(3), 212–216. https://doi.org/10.1177/1559827615569684
+
+Matizanadzo, J. T., & Paudyal, P. (2021). The delivery of obesity interventions to children and adolescents with physical disabilities: A systematic review. *Journal of Public Health*, fdab096. https://doi.org/10.1093/pubmed/fdab096
+
+McPherson, A. C., Keith, R., & Swift, J. A. (2014). Obesity prevention for children with physical disabilities: A scoping review of physical activity and nutrition interventions. *Disability and Rehabilitation*, *36*(19), 1573–1587. https://doi.org/10.3109/09638288.2013.863391
+
+Mi, Y.-J., Zhang, B., Wang, H.-J., Yan, J., Han, W., Zhao, J., Liu, D.-W., & Tian, Q.-B. (2015). Prevalence and Secular Trends in Obesity Among Chinese Adults, 1991−2011. *American Journal of Preventive Medicine*, *49*(5), 661–669. https://doi.org/10.1016/j.amepre.2015.05.005
+
+---
+
+# References
+
+Neter, J. E., Schokker, D. F., de Jong, E., Renders, C. M., Seidell, J. C., & Visscher, T. L. S. (2011). The Prevalence of Overweight and Obesity and Its Determinants in Children with and without Disabilities. *The Journal of Pediatrics*, *158*(5), 735–739. https://doi.org/10.1016/j.jpeds.2010.10.039
+
+Qin, X., & Pan, J. (2016). The Medical Cost Attributable to Obesity and Overweight in China: Estimation Based on Longitudinal Surveys: Medical Cost Attributable to Obesity and Overweight in China. *Health Economics*, *25*(10), 1291–1311. https://doi.org/10.1002/hec.3217
+
+Reinehr, T., Dobe, M., Winkel, K., Schaefer, A., & Hoffmann, D. (2010). Obesity in Disabled Children and Adolescents. *Deutsches Aerzteblatt Online*. https://doi.org/10.3238/arztebl.2010.0268
+
+Rimmer, J. A., & Rowland, J. L. (2008). Physical activity for youth with disabilities: A critical need in an underserved population. *Developmental Neurorehabilitation*, *11*(2), 141–148. https://doi.org/10.1080/17518420701688649
+
+Stein, C. J., & Colditz, G. A. (2004). The Epidemic of Obesity. *The Journal of Clinical Endocrinology & Metabolism*, *89*(6), 2522–2525. https://doi.org/2016092613284600882
+
+---
+
+# References
+
+Stunkard, A. J., Faith, M. S., & Allison, K. C. (2003). Depression and obesity. *Biological Psychiatry*, *54*(3), 330–337. https://doi.org/10.1016/S0006-3223(03)00608-5
+
+The GBD 2015 Obesity Collaborators. (2017). Health Effects of Overweight and Obesity in 195 Countries over 25 Years. *New England Journal of Medicine*, *377*(1), 13–27. https://doi.org/10.1056/NEJMoa1614362
+
+Tylka, T. L., & Kroon Van Diest, A. M. (2013). The Intuitive Eating Scale-2: Item refinement and psychometric evaluation with college women and men. *Journal of Counseling Psychology*, *60*(1), 137–153. https://doi.org/10.1037/a0030893
+
+Warren, J. M., Smith, N., & Ashwell, M. (2017). A structured literature review on the role of mindfulness, mindful eating and intuitive eating in changing eating behaviours: Effectiveness and associated potential mechanisms. *Nutrition Research Reviews*, *30*(2), 272–283. https://doi.org/10.1017/S0954422417000154
+
+Wingo, B. C., Mehta, T., Qu, P., Vogel, L. C., & Rimmer, J. H. (2015). Exploratory Study Examining Clinical Measures of Adiposity Risk for Predicting Obesity in Adolescents with Physical Disabilities. *American Journal of Physical Medicine & Rehabilitation*, *94*(8), 585–594. https://doi.org/10.1097/PHM.0000000000000323
+
+
+
+
+
+---
+class: inverse, center, middle
 
 # Thanks!
 
-Slides created via the R package [**xaringan**](https://github.com/yihui/xaringan).
-
-The chakra comes from [remark.js](https://remarkjs.com), [**knitr**](https://yihui.org/knitr/), and [R Markdown](https://rmarkdown.rstudio.com).
